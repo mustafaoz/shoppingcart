@@ -1,6 +1,7 @@
 package uk.co.shoppingcart;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -54,12 +55,12 @@ public class ShoppingCart {
                         .map(x -> x.getProduct().getPrice().doubleValue() * x.getQuantity())
                         .reduce((x, y) -> x.doubleValue() + y.doubleValue())
                         .orElse(0.00)
-        ).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+        ).setScale(2, RoundingMode.HALF_UP).toString();
     }
 
     public String calculateTotalPriceIncludingTax() {
         return BigDecimal.valueOf(Double.valueOf(calculateTotalPrice()) * TAX_COEFFICIENT)
-                .setScale(2, BigDecimal.ROUND_HALF_UP)
+                .setScale(2, RoundingMode.HALF_UP)
                 .toString();
     }
 
