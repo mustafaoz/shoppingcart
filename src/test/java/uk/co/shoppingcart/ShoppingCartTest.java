@@ -108,4 +108,13 @@ public class ShoppingCartTest {
         shoppingCart.addItem(new ShoppingCartItem(new Product(2, "Axe Deos", new BigDecimal(99.99)), 2));
         assertEquals("314.96", shoppingCart.calculateTotalPriceIncludingTax());
     }
+
+    @Test
+    public void removeItem_ValidId_Success() throws ShoppingCartException {
+        shoppingCart.addItem(new ShoppingCartItem(new Product(1, "Dove Soap", new BigDecimal(39.99)), 2));
+        assertEquals(true, shoppingCart.isProductPresent(1));
+        shoppingCart.removeItem(1);
+        assertEquals(false, shoppingCart.isProductPresent(1));
+    }
+
 }

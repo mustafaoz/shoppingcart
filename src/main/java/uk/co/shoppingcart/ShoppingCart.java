@@ -49,6 +49,21 @@ public class ShoppingCart {
         }
     }
 
+    public void removeItem(int productId) {
+        ShoppingCartItem itemFound = itemList.stream().filter(x -> x.getProduct().getId() == productId).findFirst().orElseGet( () -> null );
+        if (itemFound != null) {
+            itemList.remove(itemFound);
+        }
+    }
+
+    public boolean isProductPresent(int productId) {
+        ShoppingCartItem itemFound = itemList.stream().filter(x -> x.getProduct().getId() == productId).findFirst().orElseGet( () -> null );
+        if (itemFound != null) {
+            return true;
+        }
+        return false;
+    }
+
     public String calculateTotalPrice() {
         return BigDecimal.valueOf(
                 itemList.stream()
